@@ -18,16 +18,21 @@ var detectNetwork = function(cardNumber) {
   var prefix = parseInt(cardNumber.substring(0, 2));
 
   var networks = [
-    {length: 14,
-  	prefix: [38,39],
-  	name: "Diner's Club"},
-  	{length: 15,
-  	prefix: [34, 37],
-  	name: "American Express"}
-  ];
+    {name: "Diner's Club",
+    	length: [14],
+    	prefix: [38,39]},
+  	{name: "American Express",
+  		length: [15],
+  		prefix: [34, 37]},
+  	{name: "Visa",
+  		length: [13,16, 19],
+  		prefix: [41]},
+  	{name: "MasterCard",
+  		length: [16],
+  		prefix: [51, 52, 53, 54, 55]}];
 
   for (var i in networks){
-  	if (length === networks[i].length && networks[i].prefix.includes(prefix)){
+  	if (networks[i].length.includes(length) && networks[i].prefix.includes(prefix)){
   		return networks[i].name;
   	}
   }
