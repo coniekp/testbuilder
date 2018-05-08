@@ -29,7 +29,13 @@ var detectNetwork = function(cardNumber) {
   		prefix: [41]},
   	{name: "MasterCard",
   		length: [16],
-  		prefix: [51, 52, 53, 54, 55]}];
+  		prefix: [51, 52, 53, 54, 55]},
+  	{name: "Discover",
+  		length: [16, 19],
+  		prefix: [60, 64]},
+  	{name: "Maestro",
+  		length: [12,13,14,15,16,17,18,19],
+  		prefix: [50, 63]}];
 
   for (var i in networks){
   	if (networks[i].length.includes(length) && networks[i].prefix.includes(prefix)){

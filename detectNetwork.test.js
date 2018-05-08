@@ -106,15 +106,15 @@ describe('MasterCard', function() {
   var should = chai.should();
  
   it('has a prefix fo 51 and a length or 16', function() {
-    detectNetwork('5112345678901234')should.equal('MasterCard');
+    detectNetwork('5112345678901234').should.equal('MasterCard');
   });
  
   it('has a prefix fo 52 and a length or 16', function() {
-    detectNetwork('5212345678901234')should.equal('MasterCard');
+    detectNetwork('5212345678901234').should.equal('MasterCard');
   });
  
   it('has a prefix fo 53 and a length or 16', function() {
-    detectNetwork('5312345678901234')should.equal('MasterCard');
+    detectNetwork('5312345678901234').should.equal('MasterCard');
   });
  
 
@@ -124,8 +124,7 @@ describe('MasterCard', function() {
   // to be consistent (unlike in this file, where we use BOTH expect
   // and should, but that's just for learning), so once you've gotten 
   // these tests to pass using should syntax, refactor your tests to 
-  // use either expect or should, but not both. 
-  var should = chai.should();
+  // use either expect or should, but not both.
   
   it('has a prefix of 54 and a length of 16', function() {
     detectNetwork('5412345678901234').should.equal('MasterCard');
@@ -133,15 +132,35 @@ describe('MasterCard', function() {
  
   it('has a prefix of 55 and a length of 16', function() {
     detectNetwork('5512345678901234').should.equal('MasterCard');
-  })
+  });
  
 });
 
 describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
-  it('has a prefix of 6011 and a length of 16');
-  it('has a prefix of 6011 and a length of 19');
+  var should = chai.should();
+  
+  var prefixes = ['65', '644', '645', '646', '647', '648', '649', '6011'];
+
+  for (var i in prefixes){
+
+    var cardNum16 = prefixes[i];
+    while (cardNum16.length < 16){
+      cardNum16 += '0';
+    }
+    var cardNum19 = cardNum16 + '000';
+
+    (function(prefix) {
+      it('has a prefix of ' + prefix + ' and a length of 16', function(){
+        detectNetwork(cardNum16).should.equal('Discover');
+      });
+      it('has a prefix of ' + prefix + ' and a length of 19', function(){
+        detectNetwork(cardNum19).should.equal('Discover');
+      });
+    })(prefixes[i]);
+  }
+
 });
 
 describe('Maestro', function() {
