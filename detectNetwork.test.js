@@ -103,18 +103,18 @@ describe('MasterCard', function() {
   // Expect syntax is one way to do this, but there are others. 
   // If you want to know more, check out the documentation. 
   //   http://chaijs.com/api/bdd/
-  var expect = chai.expect;
+  var should = chai.should();
  
   it('has a prefix fo 51 and a length or 16', function() {
-    expect(detectNetwork('5112345678901234')).to.equal('MasterCard');
+    detectNetwork('5112345678901234')should.equal('MasterCard');
   });
  
   it('has a prefix fo 52 and a length or 16', function() {
-    expect(detectNetwork('5212345678901234')).to.equal('MasterCard');
+    detectNetwork('5212345678901234')should.equal('MasterCard');
   });
  
   it('has a prefix fo 53 and a length or 16', function() {
-    expect(detectNetwork('5312345678901234')).to.equal('MasterCard');
+    detectNetwork('5312345678901234')should.equal('MasterCard');
   });
  
 
