@@ -90,11 +90,11 @@ describe('Visa', function() {
   });
 
   it('has a prefix of 4 and a length of 16', function() {
-    assert(detectNetwork('4123456789012345'),'Visa');
+    assert.equal(detectNetwork('4123456789012345'),'Visa');
   });
 
   it('has a prefix of 4 and a length of 19', function() {
-    assert(detectNetwork('4123456789012345678'), 'Visa');
+    assert.equal(detectNetwork('4123456789012345678'), 'Visa');
   });
 });
 
@@ -105,15 +105,15 @@ describe('MasterCard', function() {
   //   http://chaijs.com/api/bdd/
   var expect = chai.expect;
  
-  it(FILL_ME_IN, function() {
+  it('has a prefix fo 51 and a length or 16', function() {
     expect(detectNetwork('5112345678901234')).to.equal('MasterCard');
   });
  
-  it(FILL_ME_IN, function() {
+  it('has a prefix fo 52 and a length or 16', function() {
     expect(detectNetwork('5212345678901234')).to.equal('MasterCard');
   });
  
-  it(FILL_ME_IN, function() {
+  it('has a prefix fo 53 and a length or 16', function() {
     expect(detectNetwork('5312345678901234')).to.equal('MasterCard');
   });
  
