@@ -14,33 +14,36 @@ var detectNetwork = function(cardNumber) {
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
 
-  var length = cardNumber.length;
-  var prefix = parseInt(cardNumber.substring(0, 2));
+  var cardLength = cardNumber.length;
+  var hasPrefix = function (networkPrefix){
+    return networkPrefix === cardNumber.substring(0, networkPrefix.length);
+  };
 
   var networks = [
     {name: "Diner's Club",
     	length: [14],
-    	prefix: [38,39]},
+    	prefix: ["38", "39"]},
   	{name: "American Express",
   		length: [15],
-  		prefix: [34, 37]},
+  		prefix: ["34", "37"]},
   	{name: "Visa",
   		length: [13,16, 19],
-  		prefix: [41]},
+  		prefix: ["4"]},
   	{name: "MasterCard",
   		length: [16],
-  		prefix: [51, 52, 53, 54, 55]},
+  		prefix: ["51", "52", "53", "54", "55"]},
   	{name: "Discover",
   		length: [16, 19],
-  		prefix: [60, 64]},
+  		prefix: ["65", "644", "645", "646", "647", "648", "649", "6011"]},
   	{name: "Maestro",
   		length: [12,13,14,15,16,17,18,19],
-  		prefix: [50, 63]}];
+  		prefix: ["5018", "5020", "5038", "6304"]}];
 
   for (var i in networks){
-  	if (networks[i].length.includes(length) && networks[i].prefix.includes(prefix)){
+
+  	if (networks[i].length.includes(cardLength) && networks[i].prefix.some(hasPrefix)){    
   		return networks[i].name;
-  	}
+    } 	
   }
 
   return "Unable to detect network";
