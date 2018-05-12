@@ -140,31 +140,45 @@ describe('Discover', function() {
   // Tests without a function will be marked as "pending" and not run
   // Implement these tests (and others) and make them pass!
   var should = chai.should();
-  
   var prefixes = ['65', '644', '645', '646', '647', '648', '649', '6011'];
-
-  for (var i in prefixes){
-
-    var cardNum16 = prefixes[i];
-    while (cardNum16.length < 16){
-      cardNum16 += '0';
+  
+  function fillToLength (str, length){
+    while (str.length < length) {
+      str = str + '0';
     }
-    var cardNum19 = cardNum16 + '000';
-
-    (function(prefix) {
-      it('has a prefix of ' + prefix + ' and a length of 16', function(){
-        detectNetwork(cardNum16).should.equal('Discover');
-      });
-      it('has a prefix of ' + prefix + ' and a length of 19', function(){
-        detectNetwork(cardNum19).should.equal('Discover');
-      });
-    })(prefixes[i]);
+    return str;
   }
 
+  for (var i in prefixes){
+    it ('has a prefix of ' + prefixes[i] + ' and a length of 16', function(){
+      detectNetwork(fillToLength(prefixes[i], 16)).should.equal('Discover');
+    });
+
+    it ('has a prefix of ' + prefixes[i] + ' and a length of 19', function(){
+      detectNetwork(fillToLength(prefixes[i], 19)).should.equal('Discover');
+    });
+  }
 });
 
 describe('Maestro', function() {
   // Write full test coverage for the Maestro card
+  var should = chai.should();
+  var prefixes = ['5018', '5020', '5038', '6304'];
+  function fillToLength (str, length){
+    while (str.length < length) {
+      str = str + '0';
+    }
+    return str;
+  }
+
+  for (var i in prefixes) {
+    for (var j = 12; j <=19; j++){
+      var cardNum = fillToLength(prefixes[i],j);
+      it ('has a prefix of ' + prefixes[i] + ' and a length of ' + j, function(){
+        detectNetwork(cardNum).should.equal('Maestro');
+      });
+    }
+  }
 });
 
 describe('should support China UnionPay')
