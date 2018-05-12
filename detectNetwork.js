@@ -37,8 +37,20 @@ var detectNetwork = function(cardNumber) {
   		prefix: ["65", "644", "645", "646", "647", "648", "649", "6011"]},
   	{name: "Maestro",
   		length: [12,13,14,15,16,17,18,19],
-  		prefix: ["5018", "5020", "5038", "6304"]}];
-
+  		prefix: ["5018", "5020", "5038", "6304"]},
+    {name: "China UnionPay",
+      length: [16, 17, 18, 19],
+      prefix: ["622", "624", "625", "626", "628"]},
+    {name: "Switch",
+      length: [16, 18, 19],
+      prefix: ["4903", "4905", "4911", "4936", "564182", "6333", "633110", "6759"]}];
+  
+  //exception for Visa and Switch overlap
+  if ([16, 19].includes(cardLength) && cardNumber[0]==='4'){
+    return networks[7].prefix.some(hasPrefix)? "Switch": "Visa";
+  }
+  
+  //all other cases
   for (var i in networks){
 
   	if (networks[i].length.includes(cardLength) && networks[i].prefix.some(hasPrefix)){    
