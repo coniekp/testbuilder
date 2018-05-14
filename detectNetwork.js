@@ -40,11 +40,20 @@ var detectNetwork = function(cardNumber) {
   		prefix: ["5018", "5020", "5038", "6304"]},
     {name: "China UnionPay",
       length: [16, 17, 18, 19],
-      prefix: ["622", "624", "625", "626", "628"]},
+      prefix: ["624", "625", "626"]},
     {name: "Switch",
       length: [16, 18, 19],
       prefix: ["4903", "4905", "4911", "4936", "564182", "6333", "633110", "6759"]}];
   
+  //additional prefixes for China UnionPay
+  for (var i = 622126; i<=622925; i++){
+    networks[6].prefix.push(i.toString());
+  }
+  //additional prefixes for China UnionPay
+  for (var i = 6282; i<=6288; i++){
+    networks[6].prefix.push(i.toString());
+  }
+
   //exception for Visa and Switch overlap
   if ([16, 19].includes(cardLength) && cardNumber[0]==='4'){
     return networks[7].prefix.some(hasPrefix)? "Switch": "Visa";
