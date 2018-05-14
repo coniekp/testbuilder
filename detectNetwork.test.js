@@ -193,32 +193,34 @@ describe('China UnionPay', function(){
     return str;
   }
 
-  function getIntInRange(min, max){
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
   lengths.forEach(function(length){
-    it('has a prefix within range 622126-622925 and a length of ' + length, function(){
-      var cardNum = fillToLength(getIntInRange(622126, 622925).toString(), length);
-      detectNetwork(cardNum).should.equal('China UnionPay');
-    });
+    for (var i = 622126; i<=622925; i++){
+      var cardNum = fillToLength(i.toString(), length);
+      it('has a prefix of ' + i + ' and a length of ' + length, function(){
+        detectNetwork(cardNum).should.equal('China UnionPay');
+      });
+    }
   });
 
   lengths.forEach(function(length){
-    it('has a prefix within range 624-626 and a length of ' + length, function(){
-      var cardNum = fillToLength(getIntInRange(624, 626).toString(), length);
-      detectNetwork(cardNum).should.equal('China UnionPay');
-    });
+    for (var i = 624; i<=626; i++){
+      var cardNum = fillToLength(i.toString(), length);
+      it('has a prefix of ' + i + ' and a length of ' + length, function(){
+        detectNetwork(cardNum).should.equal('China UnionPay');
+      });
+    }
   });
 
   lengths.forEach(function(length){
-    it('has a prefix within range 6282-6288 and a length of ' + length, function(){
-      var cardNum = fillToLength(getIntInRange(6282, 6288).toString(), length);
-      detectNetwork(cardNum).should.equal('China UnionPay');
-    });
+    for (var i = 6282; i<=6288; i++){
+      var cardNum = fillToLength(i.toString(), length);
+      it('has a prefix of ' + i + ' and a length of ' + length, function(){
+        detectNetwork(cardNum).should.equal('China UnionPay');
+      });
+    }
   });
-
 });
+
 describe('Switch', function(){
 
   var should = chai.should();
